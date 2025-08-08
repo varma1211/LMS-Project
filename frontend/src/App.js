@@ -1,19 +1,26 @@
 // src/App.js
-
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-import {auth} from "./firebase-config"
-import Login from "./pages/login";
-import Register from "./pages/Register";
-import Logout from "./pages/ogout";
+import LoginPage from "./pages/Loginpage";
+import RegisterPage from "./pages/Registerpage";
+import Dashboard from "./pages/Dashboard";
+import Logout from "./pages/Logout";
+import ProtectedRoute from "./components/ProtectedRoute"; // the one we created earlier
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/logout" element={<Logout />} />
       </Routes>
     </Router>
